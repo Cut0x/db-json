@@ -1,4 +1,4 @@
-const module = require('./data_module');
+const module = require('./db-json/index');
 
 const file = './data.json';
 
