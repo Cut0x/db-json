@@ -30,7 +30,7 @@ console.log(data);
 > Cette fonction permet d'ajouter une nouvelle entrée à la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-data_module.add_entry('./data.json', { id: 1, name: 'John Doe', age: 30 });
+data_module.add_entry('./data.json', { id: 1, name: 'Martin', age: 20 });
 ```
   
   
@@ -38,7 +38,7 @@ data_module.add_entry('./data.json', { id: 1, name: 'John Doe', age: 30 });
 > Cette fonction permet de modifier une entrée existante dans la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-data_module.update_entry('./data.json', 1, { name: 'Jane Doe', age: 35 });
+data_module.update_entry('./data.json', 1, { name: 'Martin', age: 25 });
 ```
   
   
