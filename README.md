@@ -1,14 +1,14 @@
-# Module de gestion de données JSON
+# 📦 Module de gestion de données JSON
 Ce module Node.js permet de stocker, modifier et supprimer des données dans un fichier JSON.
 
-# Installation
+# 📥 Installation
 Pour installer ce module, vous pouvez utiliser NPM :
 
 ```
 npm install
 ```
 <br>
-# Utilisation
+# ✏️ Utilisation
 > Pour utiliser ce module, vous devez d'abord l'importer dans votre code :
 
 ```js
