@@ -7,7 +7,7 @@ Pour installer ce module, vous pouvez utiliser NPM :
 ```
 npm install
 ```
-<br>
+  
 # ✏️ Utilisation
 > Pour utiliser ce module, vous devez d'abord l'importer dans votre code :
 
