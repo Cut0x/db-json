@@ -54,21 +54,21 @@ data_module.delete_entry('./data.json', 1);
 Voici un exemple complet d'utilisation de ce module pour stocker, modifier et supprimer des données dans un fichier JSON :
   
 ```js
-const data_module = require('./data_module');
+const module = require('./db-json/index');
 
-const FILE_PATH = './data.json';
+const file = './data.json';
 
 // Ajout d'une nouvelle entrée
-data_module.add_entry(FILE_PATH, { id: 1, name: 'Martin', age: 20 });
+module.add_entry(file, { id: 1, name: 'Martin', age: 20 });
 
 // Modification d'une entrée existante
-data_module.update_entry(FILE_PATH, 1, { name: 'Martin', age: 25 });
+module.update_entry(file, 1, { name: 'Martin', age: 25 });
 
 // Suppression d'une entrée existante
-data_module.delete_entry(FILE_PATH, 1);
+module.delete_entry(file, 1);
 
 // Affichage des données actuelles
-const data = data_module.load_data(FILE_PATH);
+const data = module.load_data(FILE_PATH);
 console.log(data);
 ```
   
