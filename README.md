@@ -15,44 +15,44 @@ npm install
 const data_module = require('./data_module');
 ```
 > Ensuite, vous pouvez appeler les fonctions fournies pour stocker, modifier et supprimer des données dans le fichier JSON.
-<br>
-<br>
+  
+  
 ## 📜 `load_data(file_path)`
 > Cette fonction permet de charger les données existantes à partir du fichier JSON spécifié.
-<br>
+  
 ```js
 const data = data_module.load_data('./data.json');
 console.log(data);
 ```
-<br>
-<br>
+  
+  
 ## 📜 `add_entry(file_path, new_entry)`
 > Cette fonction permet d'ajouter une nouvelle entrée à la liste des données stockées dans le fichier JSON spécifié.
-<br>
+  
 ```js
 data_module.add_entry('./data.json', { id: 1, name: 'John Doe', age: 30 });
 ```
-<br>
-<br>
+  
+  
 ## 📜 `update_entry(file_path, entry_id, updated_entry)`
 > Cette fonction permet de modifier une entrée existante dans la liste des données stockées dans le fichier JSON spécifié.
-<br>
+  
 ```js
 data_module.update_entry('./data.json', 1, { name: 'Jane Doe', age: 35 });
 ```
-<br>
-<br>
+  
+  
 ## 📜 `delete_entry(file_path, entry_id)`
 > Cette fonction permet de supprimer une entrée existante de la liste des données stockées dans le fichier JSON spécifié.
-<br>
+  
 ```js
 data_module.delete_entry('./data.json', 1);
 ```
-<br>
-<br>
+  
+  
 # 🧪 Exemple complet
 Voici un exemple complet d'utilisation de ce module pour stocker, modifier et supprimer des données dans un fichier JSON :
-
+  
 ```js
 const data_module = require('./data_module');
 
@@ -71,6 +71,6 @@ data_module.delete_entry(FILE_PATH, 1);
 const data = data_module.load_data(FILE_PATH);
 console.log(data);
 ```
-
+  
 ## Contributeurs
 Module proposé par <a href="https://twitter.com/Cut0x">Cut0x</a>
