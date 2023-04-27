@@ -12,7 +12,7 @@ npm install
 > Pour utiliser ce module, vous devez d'abord l'importer dans votre code :
 
 ```js
-const data_module = require('./data_module');
+const module = require('./db-json/index');
 ```
 > Ensuite, vous pouvez appeler les fonctions fournies pour stocker, modifier et supprimer des données dans le fichier JSON.
   
@@ -21,7 +21,7 @@ const data_module = require('./data_module');
 > Cette fonction permet de charger les données existantes à partir du fichier JSON spécifié.
   
 ```js
-const data = data_module.load_data('./data.json');
+const data = module.load_data('./data.json');
 console.log(data);
 ```
   
@@ -30,7 +30,7 @@ console.log(data);
 > Cette fonction permet d'ajouter une nouvelle entrée à la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-data_module.add_entry('./data.json', { id: 1, name: 'Martin', age: 20 });
+module.add_entry('./data.json', { id: 1, name: 'Martin', age: 20 });
 ```
   
   
@@ -38,7 +38,7 @@ data_module.add_entry('./data.json', { id: 1, name: 'Martin', age: 20 });
 > Cette fonction permet de modifier une entrée existante dans la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-data_module.update_entry('./data.json', 1, { name: 'Martin', age: 25 });
+module.update_entry('./data.json', 1, { name: 'Martin', age: 25 });
 ```
   
   
@@ -46,7 +46,7 @@ data_module.update_entry('./data.json', 1, { name: 'Martin', age: 25 });
 > Cette fonction permet de supprimer une entrée existante de la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-data_module.delete_entry('./data.json', 1);
+module.delete_entry('./data.json', 1);
 ```
   
   
