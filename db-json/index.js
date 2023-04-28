@@ -30,7 +30,10 @@ function add_entry(file_path, new_entry) {
         if (err) {
             throw new TypeError(`Le fichier ${file} n'est pas accessible en lecture et/ou en écriture.`);
         } else {
-            const data = load_data(file_path);
+            let data = load_data(file_path);
+            if (!data) {
+                data = [];
+            };
             data.push(new_entry);
             saveData(file_path, data);
         };
@@ -42,7 +45,12 @@ function update_entry(file_path, entry_id, updated_entry) {
         if (err) {
             throw new TypeError(`Le fichier ${file} n'est pas accessible en lecture et/ou en écriture.`);
         } else {
-            const data = load_data(file_path);
+            let data = load_data(file_path);
+
+            if (!data) {
+                data = [];
+            };
+
             const index = data.findIndex(entry => entry.id === entry_id);
 
             if (index !== -1) {
@@ -59,6 +67,7 @@ function delete_entry(file_path, entry_id) {
             throw new TypeError(`Le fichier ${file} n'est pas accessible en lecture et/ou en écriture.`);
         } else {
             const data = load_data(file_path);
+            console.log("Loaded data:", data);
             const index = data.findIndex(entry => entry.id === entry_id);
 
             if (index !== -1) {
