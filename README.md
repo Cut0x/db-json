@@ -7,46 +7,46 @@ Pour installer ce module, vous pouvez utiliser NPM :
 ```
 npm install
 ```
+***⚠️ Pas encore disponible !**
   
 # ✏️ Utilisation
 > Pour utiliser ce module, vous devez d'abord l'importer dans votre code :
 
 ```js
-const tmodule = require('./db-json/index');
+const db = require('./db-json');
 ```
 > Ensuite, vous pouvez appeler les fonctions fournies pour stocker, modifier et supprimer des données dans le fichier JSON.
   
   
-## 📜 `load_data(file_path)`
+## 📜 `getData()`
 > Cette fonction permet de charger les données existantes à partir du fichier JSON spécifié.
   
 ```js
-const data = tmodule.load_data('./data.json');
-console.log(data);
+console.log(db.getData());
 ```
   
   
-## 📜 `add_entry(file_path, new_entry)`
+## 📜 `addEntry(new_entry)`
 > Cette fonction permet d'ajouter une nouvelle entrée à la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-tmodule.add_entry('./data.json', { id: 1, name: 'Martin', age: 20 });
+db.addEntry({ id: 1, name: 'Martin', age: 20 });
 ```
   
   
-## 📜 `update_entry(file_path, entry_id, updated_entry)`
+## 📜 `updateEntry(entry_id, updated_entry)`
 > Cette fonction permet de modifier une entrée existante dans la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-tmodule.update_entry('./data.json', 1, { name: 'Martin', age: 25 });
+db.updateEntry(1, { name: 'Martin', age: 25 });
 ```
   
   
-## 📜 `delete_entry(file_path, entry_id)`
+## 📜 `deleteEntry(entry_id)`
 > Cette fonction permet de supprimer une entrée existante de la liste des données stockées dans le fichier JSON spécifié.
   
 ```js
-tmodule.delete_entry('./data.json', 1);
+db.deleteEntry(1);
 ```
   
   
@@ -54,22 +54,22 @@ tmodule.delete_entry('./data.json', 1);
 Voici un exemple complet d'utilisation de ce module pour stocker, modifier et supprimer des données dans un fichier JSON :
   
 ```js
-const tmodule = require('./db-json/index');
+const db = require('./db-json');
 
-const file = './data.json';
+// Ajouter une entrée
+db.addEntry({ id: 1, name: 'Alice' });
 
-// Ajout d'une nouvelle entrée
-tmodule.add_entry(file, { id: 1, name: 'Martin', age: 20 });
+// Obtenir les données
+console.log(db.getData());
 
-// Modification d'une entrée existante
-tmodule.update_entry(file, 1, { name: 'Martin', age: 25 });
+// Mettre à jour une entrée
+db.updateEntry(1, { id: 1, name: 'Bob' });
 
-// Suppression d'une entrée existante
-tmodule.delete_entry(file, 1);
+// Supprimer une entrée
+db.deleteEntry(1);
 
-// Affichage des données actuelles
-const data = tmodule.load_data(FILE_PATH);
-console.log(data);
+// Obtenir les données
+console.log(db.getData());
 ```
   
 ## Contributeurs
