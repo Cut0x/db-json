@@ -74,4 +74,4 @@ function initData() {
     fs.writeFileSync(FILENAME, JSON.stringify(INIT_DATA, null, 4));
 };
 
-module.exports = { addEntry, updateEntry, deleteEntry, getData };
+module.exports = { addEntry, updateEntry, deleteEntry, getData, find };
