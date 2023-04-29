@@ -22,7 +22,7 @@ const db = require('./db-json');
   
   
 ## 📜 `getData()`
-> Cette fonction permet de charger les données existantes à partir du fichier JSON spécifié.
+> Cette fonction permet de charger les données existantes à partir du fichier JSON.
   
 ```js
 console.log(db.getData());
