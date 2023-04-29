@@ -53,6 +53,16 @@ db.deleteEntry(1);
 ```
   
   
+## 📜 `find(entry)`
+> Cette fonction permet de récupérer des données spécifique;
+  
+```js
+const user = db.find({ name : "Martin" });
+
+console.log(`Âge : ${user.age}`);
+```
+  
+  
 # 🧪 Exemple complet
 Voici un exemple complet d'utilisation de ce module pour stocker, modifier et supprimer des données dans un fichier JSON :
   
@@ -79,15 +89,11 @@ Voici un exemple vous permettant de récupérer les informations d'un objet pré
 ```js
 const db = require('./db-json');
 
-const liste = db.getData();
+db.addEntry({ name: "Martin", age: 30 });
 
-for (let index = 0; index < liste.length; index++) {
-    const element = liste[index];
-    
-    if (element.name == "Cut0x") {
-        console.log(`${element.id} - ${element.name}`);
-    };
-};
+const user = db.find({ name: "Martin" });
+
+console.log(user.age);
 ```
   
 ## Contributeurs
