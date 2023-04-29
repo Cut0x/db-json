@@ -85,7 +85,7 @@ for (let index = 0; index < liste.length; index++) {
     const element = liste[index];
     
     if (element.name == "Cut0x") {
-        console.log(`Personnage :\nNom : ${element.name}\nStatistique :\nForce : ${element.stats.power}\nProtection : ${element.stats.shield}\n`);
+        console.log(`${element.id} - ${element.name}`);
     };
 };
 ```
