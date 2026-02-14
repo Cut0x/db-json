@@ -1,6 +1,6 @@
 {
   "name": "@cut0x/db-json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple JSON file database for Node.js (zero dependency)",
   "main": "index.js",
   "exports": {
