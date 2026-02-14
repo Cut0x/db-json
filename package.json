@@ -1,5 +1,44 @@
 {
-  "dependencies": {
-    "fs": "^0.0.1-security"
-  }
+  "name": "@cut0x/db-json",
+  "version": "1.0.0",
+  "description": "Simple JSON file database for Node.js (zero dependency)",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "types": "index.d.ts",
+  "type": "commonjs",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "README.md",
+    "PACKAGE.md"
+  ],
+  "keywords": [
+    "json",
+    "database",
+    "file-db",
+    "storage",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cut0x/db-json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cut0x/db-json/issues"
+  },
+  "homepage": "https://github.com/Cut0x/db-json#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "author": "Cut0x"
 }

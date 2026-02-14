@@ -1,118 +1,184 @@
-# 📦 Module de gestion de données JSON
-Ce module Node.js permet de stocker, modifier et supprimer des données dans un fichier JSON.
+# db-json
 
+A lightweight JSON file database for Node.js.
 
-# ⚡ Information
-Vous n'êtes pas obligé de créer le fichier JSON, il est même conseillé de laisser le module créer et initialiser le faire lui même pour le bon fonctionnement du système.
+- Zero external dependency (only Node built-in modules)
+- Simple API (CRUD + find + upsert)
+- Single JSON file storage
+- Ready for npm and GitHub Packages
 
+## Requirements
 
-# 📥 Installation
-Pour installer ce module, vous pouvez utiliser Git :
+- Node.js 18 or newer
 
+## Installation
 
+```bash
+npm install @cut0x/db-json
 ```
-git clone https://github.com/Cut0x/db-json.git
-```
 
-
-# ✏️ Utilisation
-> Pour utiliser ce module, vous devez d'abord l'importer dans votre code :
-
+## Quick Start
 
 ```js
-const db = require('./db-json');
+const { createDb } = require("@cut0x/db-json");
+
+const db = createDb({ file: "./users.json" });
+
+db.insert({ id: 1, username: "alice", role: "admin" });
+db.insert({ id: 2, username: "bob", role: "user" });
+
+console.log(db.all());
+console.log(db.getById(1));
 ```
-> Ensuite, vous pouvez appeler les fonctions fournies pour stocker, modifier et supprimer des données dans le fichier JSON.
-  
-  
-  
-## 📜 `getData()`
-> Cette fonction permet de charger les données existantes à partir du fichier JSON.
-  
-  
+
+## API
+
+### `createDb(options?)`
+
+Create a database instance.
+
+Options:
+- `file` (`string`, default: `"data.json"`): JSON file path.
+- `idKey` (`string`, default: `"id"`): unique identifier key.
+- `pretty` (`number`, default: `2`): JSON indentation size.
+- `createIfMissing` (`boolean`, default: `true`): create file automatically if missing.
+
+Returns an object with the methods below.
+
+### `all()`
+
+Return every record.
+
+### `find(query)`
+
+Filter records.
+
+Accepted query formats:
+- object match: `find({ role: "admin" })`
+- predicate function: `find((row) => row.age >= 18)`
+
+### `getById(id)`
+
+Return one record by ID, or `null` if not found.
+
+### `insert(entry)`
+
+Insert a new record.
+
+Rules:
+- record must be an object
+- record must include `idKey`
+- ID must be unique
+
+Throws if invalid or duplicate ID.
+
+### `upsert(entry)`
+
+Insert if ID does not exist, replace if it already exists.
+
+### `updateById(id, patch)`
+
+Patch an existing record and keep existing fields.
+
+- Returns updated object
+- Returns `null` if not found
+- Throws if patch tries to change the ID
+
+### `replaceById(id, entry)`
+
+Replace an existing record entirely.
+
+- Returns replacement object
+- Returns `null` if not found
+- Throws if `entry[idKey] !== id`
+
+### `removeById(id)`
+
+Delete one record.
+
+- Returns `true` if deleted
+- Returns `false` if not found
+
+### `clear()`
+
+Remove all records and return an empty array.
+
+## Full Example
+
 ```js
-console.log(db.getData());
+const { createDb } = require("@cut0x/db-json");
+
+const db = createDb({
+  file: "./data/users.json",
+  idKey: "id",
+  pretty: 2,
+  createIfMissing: true
+});
+
+// create
+db.insert({ id: 1, username: "alice", age: 24, role: "admin" });
+
+// read
+console.log(db.getById(1));
+console.log(db.find({ role: "admin" }));
+
+// update
+db.updateById(1, { age: 25 });
+
+// upsert
+// existing id => replace
+db.upsert({ id: 1, username: "alice", age: 26, role: "owner" });
+// missing id => insert
+db.upsert({ id: 2, username: "bob", age: 20, role: "user" });
+
+// delete
+db.removeById(2);
+
+console.log(db.all());
 ```
-  
-  
-  
-## 📜 `addEntry(new_entry)`
-> Cette fonction permet d'ajouter une nouvelle entrée à la liste des données stockées dans le fichier JSON.
-  
-  
+
+## Error Behavior
+
+The module throws explicit errors for invalid usage:
+- invalid `file` or `idKey`
+- invalid JSON content (must be an array)
+- invalid input types
+- duplicate ID on `insert`
+- ID mutation attempts on `updateById`
+
+Use `try/catch` when needed:
+
 ```js
-db.addEntry({ id: 1, name: 'Martin', age: 20 });
-```
-  
-  
-  
-## 📜 `updateEntry(entry_id, updated_entry)`
-> Cette fonction permet de modifier une entrée existante dans la liste des données stockées dans le fichier JSON.
-  
-  
-```js
-db.updateEntry(1, { name: 'Martin', age: 25 });
-```
-  
-  
-  
-## 📜 `deleteEntry(entry_id)`
-> Cette fonction permet de supprimer une entrée existante de la liste des données stockées dans le fichier JSON.
-  
-  
-```js
-db.deleteEntry(1);
-```
-  
-  
-  
-## 📜 `find(entry)`
-> Cette fonction permet de récupérer des données spécifique;
-  
-  
-```js
-const user = db.find({ name : "Martin" });
-
-console.log(`Âge : ${user.age}`);
-```
-  
-  
-  
-# 🧪 Exemple complet
-Voici un exemple complet d'utilisation de ce module pour stocker, modifier et supprimer des données dans un fichier JSON :
-  
-  
-```js
-const db = require('./db-json');
-
-// Ajouter une entrée
-db.addEntry({ id: 1, name: 'Alice' });
-
-// Obtenir les données
-console.log(db.getData());
-
-// Mettre à jour une entrée
-db.updateEntry(1, { id: 1, name: 'Bob' });
-
-// Supprimer une entrée
-db.deleteEntry(1);
-
-// Obtenir les données
-console.log(db.getData());
+try {
+  db.insert({ username: "missing-id" });
+} catch (error) {
+  console.error(error.message);
+}
 ```
 
+## TypeScript
 
-Voici un exemple vous permettant de récupérer les informations d'un objet précis
-```js
-const db = require('./db-json');
+Type definitions are included (`index.d.ts`).
 
-db.addEntry({ name: "Martin", age: 30 });
+```ts
+import { createDb } from "@cut0x/db-json";
 
-const user = db.find({ name: "Martin" });
+type User = {
+  id: number;
+  username: string;
+  age: number;
+};
 
-console.log(user.age);
+const db = createDb<User>({ file: "./users.json" });
+const user = db.getById(1);
 ```
-  
-  
-## Contributeurs
-Module proposé par <a href="https://twitter.com/Cut0x">Cut0x</a>
+
+## Tests
+
+```bash
+npm test
+```
+
+## Publish
+
+Publication guide is available in `PACKAGE.md`.
